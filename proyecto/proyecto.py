@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
-import numpy as np
 
 def explore():
     root.filename = ''
@@ -69,6 +68,16 @@ def create_map(matrix, x, y):
         lbl.grid(column=0, row=c)
         letter += 1
         c += 1
+
+    R = 1
+    for r in range(y):
+        C = 1
+        for c in range(len(x)):
+            cell = Entry(map_window, width=5)
+            cell.grid(padx=3, pady=3, row=R, column=C)
+            cell.insert(0, matrix[r][c])
+            C += 1
+        R += 1
 
     map_window.mainloop()
 
