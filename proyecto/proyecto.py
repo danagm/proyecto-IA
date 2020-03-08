@@ -56,7 +56,7 @@ def create_map(matrix, x, y):
     map_window = Tk()
     map_window.title("mapa")
     letter = 65
-    c = 0
+    c = 1
     for i in x:
         lbl = Label(map_window, text = chr(letter))
         lbl.grid(column=c, row=0)
