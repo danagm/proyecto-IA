@@ -1,12 +1,31 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+from tkinter import messagebox
+import numpy as np
+
 
 def explore():
-    root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select fil",filetypes = (("txt files","*.txt"),("all files","*.*")))
+    root.filename = ''
+    root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("txt files","*.txt"),("all files","*.*")))
     parts = root.filename.split('.')
-    print(parts)
-    #print (root.filename)
+    if(parts[len(parts)-1] != 'txt'):
+        messagebox.showinfo(message='Favor de seleccionar un archivo de texto, "txt file"', title="Error en archivo")
+    else:
+        my_file = open(root.filename, 'r')
+        str_matrix = my_file.read()
+        my_file.close()
+        check(str_matrix)
+
+
+def check(str_matrix):
+    for x in str_matrix:
+        if(x == ','):
+            pass
+        elif(x.isnumeric):
+            pass
+        #print(x, '\n')
+
 
 
 root = Tk()
