@@ -4,6 +4,8 @@ from tkinter import filedialog
 from tkinter import messagebox
 import numpy as np
 
+matrix = []
+matrix.append([])
 
 def explore():
     root.filename = ''
@@ -19,12 +21,24 @@ def explore():
 
 
 def check(str_matrix):
+    only_numeric = True
+    i = 0
     for x in str_matrix:
         if(x == ','):
             pass
-        elif(x.isnumeric):
-            pass
-        #print(x, '\n')
+        elif(x.isdigit()):
+            matrix[i].append(x)
+        elif(x=='\0' or x=='\n'):
+            matrix.append([])
+            i = i+1
+        else:
+            messagebox.showinfo(message='La matriz contiene valores no numéricos', title="Error en archivo")
+            only_numeric = False
+            break
+
+    if(only_numeric == True):
+        print(matrix)
+        
 
 
 
