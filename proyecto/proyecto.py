@@ -51,6 +51,22 @@ def check_form(matrix):
     if(good_form == True):
         create_map(matrix, first_y, rows)
 
+def save_colors(color_entrys, terrain_entrys): #guarda el texto de las entrys de la función siguiente
+    colors = []
+    terrains = []
+    for c in color_entrys:
+        colors.append(c.get())
+    
+    for t in terrain_entrys:
+        terrains.append(t.get())
+    
+    for c in colors:
+        print(c)
+    
+    for t in terrains:
+        print(t)
+
+
 def colors(matrix):
     numbers = [] #números diferentes que existen en la matriz
     for i in matrix:
@@ -61,16 +77,30 @@ def colors(matrix):
     if(len(numbers) > 10):
         messagebox.showinfo(message='Hay demasiados terrenos', title="Error en archivo")
     else:
+        color_entrys = [] #lista de entrys de los colores
+        terrain_entrys = [] #lista de entrys de los nombres de los terrenos
         ask_colors_window = Tk()
         ask_colors_window.geometry('500x400')
         ask_colors_window.title("Terrenos")
         ask_colors_window.configure(bg = 'light pink')
-        Label(ask_colors_window, text="01 - Café\n02 - Naranja\n03 - Negro\n04 - Gris\n05 - Verde fuerte").grid(column=0, row=3)
-        Label(ask_colors_window, text="06 - Verde claro\n07 - Azul fuerte\n08 - Azul claro\n09 - Blanco\n10 - Rojo").grid(column=0, row=8)
+        ttk.Label(ask_colors_window, text="01 - Café\n02 - Naranja\n03 - Negro\n04 - Gris\n05 - Verde fuerte").place(x=0, y=0)
+        ttk.Label(ask_colors_window, text="06 - Verde claro  \n07 - Azul fuerte\n08 - Azul claro\n09 - Blanco\n10 - Rojo").place(x=0, y=76)
+        ttk.Label(ask_colors_window, text="                  Terreno                   Color    ").place(x=175, y=20)
 
-        
-        
-        
+        i_place = 50
+        for i in range(len(numbers)):
+            c_e = StringVar()
+            t_e = StringVar()
+            ttk.Label(ask_colors_window, text=numbers[i]).place(x=180, y=i_place)
+            Entry(ask_colors_window, textvariable=c_e, width=3).place(x=330, y=i_place)
+            color_entrys.append(c_e)
+            Entry(ask_colors_window, textvariable=t_e).place(x=200, y=i_place)
+            terrain_entrys.append(t_e)
+            i_place += 30
+
+        button_save = ttk.Button(ask_colors_window, text="guardar", command=lambda: save_colors(color_entrys, terrain_entrys))
+        button_save.place(x=180, y=350)
+
         ask_colors_window.mainloop()
 
     return numbers
