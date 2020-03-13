@@ -51,7 +51,33 @@ def check_form(matrix):
     if(good_form == True):
         create_map(matrix, first_y, rows)
 
+def colors(matrix):
+    numbers = [] #números diferentes que existen en la matriz
+    for i in matrix:
+        for j in i:
+            if(not numbers.__contains__(j)):
+                numbers.append(j)
+    
+    if(len(numbers) > 10):
+        messagebox.showinfo(message='Hay demasiados terrenos', title="Error en archivo")
+    else:
+        ask_colors_window = Tk()
+        ask_colors_window.geometry('500x400')
+        ask_colors_window.title("Terrenos")
+        ask_colors_window.configure(bg = 'light pink')
+        Label(ask_colors_window, text="01 - Café\n02 - Naranja\n03 - Negro\n04 - Gris\n05 - Verde fuerte").grid(column=0, row=3)
+        Label(ask_colors_window, text="06 - Verde claro\n07 - Azul fuerte\n08 - Azul claro\n09 - Blanco\n10 - Rojo").grid(column=0, row=8)
+
+        
+        
+        
+        ask_colors_window.mainloop()
+
+    return numbers
+
 def create_map(matrix, x, y):
+    numbers = colors(matrix)
+    print(numbers)
     map_window = Tk()
     map_window.title("mapa")
     letter = 65
